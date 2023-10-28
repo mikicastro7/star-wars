@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class HomeController extends AbstractController
 {
 
-    #[Route('/')]
+    #[Route('/', name: 'homepage')]
     public function homepage(EntityManagerInterface $entityManager, Request $request)
     {
         $search = $request->query->get('search');

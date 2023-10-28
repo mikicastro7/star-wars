@@ -30,8 +30,8 @@ class Characters
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $picture;
 
-    #[ORM\OneToMany(mappedBy: 'characters', targetEntity: MoviesCharacters::class)]
-    private Collection $moviesCharacters;
+    #[ORM\OneToMany(mappedBy: 'character', targetEntity: MoviesCharacters::class, cascade: ['remove'])]
+    private $moviesCharacters;
 
     public function __construct()
     {

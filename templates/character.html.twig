@@ -33,7 +33,9 @@
                     <li>{{ character.gender }}</li>
                 </ul>
             </div>
-            <button>x</button>
+            <form method="post" action="{{ path('delete_character', {'id': character.id}) }}">
+                <button type="submit">Delete</button>
+            </form>
         </div>
         {% endfor %}
     </main>
