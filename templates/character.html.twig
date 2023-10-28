@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    <main>
+        {% for character in characters %}
+        <div class="character-card">
+            <img src="https://lumiere-a.akamaihd.net/v1/images/luke-skywalker-main_7ffe21c7.jpeg?region=130%2C147%2C1417%2C796"
+                alt="Luck">
+            <div class="data-container">
+                <ul>
+                    <li>{{ character.name }}</li>
+                    <li>{{ character.mass }}</li>
+                    <li>{{ character.height }}</li>
+                    <li>{{ character.gender }}</li>
+                </ul>
+            </div>
+            <button>x</button>
+        </div>
+        {% endfor %}
+    </main>
+    {% endblock %}
+</body>
+
+</html>
+
+<style>
+    .character-card {
+        display: flex;
+        align-items: center;
+        border: 1px solid black;
+        width: 300px;
+        margin: 10px;
+        padding: 4px;
+    }
+
+    main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .character-card img {
+        height: 40px;
+    }
+</style>
