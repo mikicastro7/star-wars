@@ -34,11 +34,17 @@ class StarWarsImportCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $io->note("Importing movies");
+        $io->note("Requesting data to the API");
 
         $httpClient = HttpClient::create();
         $movies = $httpClient->request('GET', 'https://swapi.dev/api/films')->toArray();
-        $characters = $httpClient->request('GET', 'https://swapi.dev/api/people')->toArray();
+        $characters = [];
+        for ($page = 1; $page <= 3; $page++) {
+            $response = $httpClient->request('GET', "https://swapi.dev/api/people?page=$page")->toArray();
+            $characters = array_merge($characters, $response['results']);
+        }
+
+        $io->note("Import movies");
 
         foreach ($movies["results"] as $i => $movie) {
             $movieName = $movie["title"];
@@ -54,12 +60,9 @@ class StarWarsImportCommand extends Command
         }
         $this->entityManager->flush();
 
-        $insertedCharacterCount = 0;
+        $io->note("Importing character");
         
-        foreach ($characters["results"] as $i => $character) {
-            if ($insertedCharacterCount >= 30) {
-                break;
-            }
+        foreach ($characters as $i => $character) {
     
             $characterEntity = new Characters();
     
@@ -75,7 +78,6 @@ class StarWarsImportCommand extends Command
     
                 $this->entityManager->persist($characterEntity);
     
-                $insertedCharacterCount++;
             }
 
             foreach ($character["films"] as $key => $characterFilm) {
@@ -98,7 +100,7 @@ class StarWarsImportCommand extends Command
 
         $this->entityManager->flush();
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $io->success('Import finished');
 
         return Command::SUCCESS;
     }

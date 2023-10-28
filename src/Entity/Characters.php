@@ -19,10 +19,10 @@ class Characters
     private string $name;
 
     #[ORM\Column(length: 255)]
-    private int $mass;
+    private string $mass;
 
     #[ORM\Column(length: 255)]
-    private int $height;
+    private string $height;
 
     #[ORM\Column(length: 255)]
     private string $gender;
@@ -55,24 +55,24 @@ class Characters
         return $this;
     }
 
-    public function getMass(): int
+    public function getMass(): string
     {
         return $this->mass;
     }
 
-    public function setMass(int $mass): static
+    public function setMass(string $mass): static
     {
         $this->mass = $mass;
 
         return $this;
     }
 
-    public function getHeight(): int
+    public function getHeight(): string
     {
         return $this->height;
     }
 
-    public function setHeight(int $height): static
+    public function setHeight(string $height): static
     {
         $this->height = $height;
 
