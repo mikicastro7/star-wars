@@ -27,8 +27,8 @@ class Characters
     #[ORM\Column(length: 255)]
     private string $gender;
 
-    #[ORM\Column(length: 255)]
-    private string $picture;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $picture;
 
     #[ORM\OneToMany(mappedBy: 'characters', targetEntity: MoviesCharacters::class)]
     private Collection $moviesCharacters;
@@ -91,12 +91,12 @@ class Characters
         return $this;
     }
 
-    public function getPicture(): string
+    public function getPicture(): ?string
     {
         return $this->picture;
     }
 
-    public function setPicture(string $picture): static
+    public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
 
