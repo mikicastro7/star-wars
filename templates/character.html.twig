@@ -15,6 +15,12 @@
 
 <body>
     {% block body %}
+    <header>
+        <form action="/" method="get">
+            <input type="text" name="search" placeholder="Search by name" value="{{ app.request.query.get('search') }}">
+            <button type="submit">Search</button>
+        </form>
+    </header>
     <main>
         {% for character in characters %}
         <div class="character-card">
@@ -45,6 +51,7 @@
         width: 300px;
         margin: 10px;
         padding: 4px;
+        justify-content: space-evenly;
     }
 
     main {
