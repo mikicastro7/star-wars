@@ -19,5 +19,9 @@
 
     {{ form_end(form) }}
 
+     <form method="post" action="{{ path('delete_character', {'id': character.id}) }}">
+        <button type="submit">Delete</button>
+    </form>
+
     <a href="{{ path('homepage') }}">Back to Characters</a>
 {% endblock %}
