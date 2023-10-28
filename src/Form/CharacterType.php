@@ -22,6 +22,7 @@ class CharacterType extends AbstractType
             ->add('picture', FileType::class, [
                 'label' => 'Character Picture',
                 'required' => false,
+                'data_class' => null,
             ]);
     }
 
