@@ -24,8 +24,7 @@
     <main>
         {% for character in characters %}
         <div class="character-card">
-            <img src="https://lumiere-a.akamaihd.net/v1/images/luke-skywalker-main_7ffe21c7.jpeg?region=130%2C147%2C1417%2C796"
-                alt="Luck">
+            <img src="{{character.picture}}" alt="{{ character.name }}">
             <div class="data-container">
                 <ul>
                     <li>{{ character.name }}</li>
