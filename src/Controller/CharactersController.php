@@ -27,10 +27,32 @@ class CharactersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle form submission and update the character
+            // Handle file upload
+            /** @var UploadedFile $pictureFile */
+            $pictureFile = $form->get('picture')->getData();
+
+            if ($pictureFile) {
+                $newFileName = uniqid().'.'.$pictureFile->guessExtension();
+
+                // Move the file to the public directory
+                try {
+                    $pictureFile->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads/characters',
+                        $newFileName
+                    );
+                } catch (FileException $e) {
+                    // Handle file upload error, if needed
+                }
+
+                // Set the picture field to the new file path
+                $character->setPicture($newFileName);
+            }
+
+            // Persist and flush the updated character entity
+            $entityManager->persist($character);
             $entityManager->flush();
 
-            return $this->redirectToRoute('homepage');
+            // Redirect or return a response as needed
         }
 
         return $this->render('edit_character.html.twig', [

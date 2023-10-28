@@ -23,20 +23,22 @@
     </header>
     <main>
         {% for character in characters %}
-        <div class="character-card">
-            <img src="{{character.picture}}" alt="{{ character.name }}">
-            <div class="data-container">
-                <ul>
-                    <li>{{ character.name }}</li>
-                    <li>{{ character.mass }}</li>
-                    <li>{{ character.height }}</li>
-                    <li>{{ character.gender }}</li>
-                </ul>
+        <a href="{{ path('edit_character', {'id': character.id}) }}">
+            <div class="character-card">
+                <img src="/uploads/characters/{{ character.picture }}" alt="{{ character.name }}">
+                <div class="data-container">
+                    <ul>
+                        <li>{{ character.name }}</li>
+                        <li>{{ character.mass }}</li>
+                        <li>{{ character.height }}</li>
+                        <li>{{ character.gender }}</li>
+                    </ul>
+                </div>
+                <form method="post" action="{{ path('delete_character', {'id': character.id}) }}">
+                    <button type="submit">Delete</button>
+                </form>
             </div>
-            <form method="post" action="{{ path('delete_character', {'id': character.id}) }}">
-                <button type="submit">Delete</button>
-            </form>
-        </div>
+        </a>
         {% endfor %}
     </main>
     {% endblock %}
@@ -64,5 +66,11 @@
 
     .character-card img {
         height: 40px;
+    }
+
+    a {
+        color: initial;
+        outline: none;
+        text-decoration: none;
     }
 </style>
