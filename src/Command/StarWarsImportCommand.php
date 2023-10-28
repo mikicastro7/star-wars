@@ -12,6 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\HttpClient\HttpClient;
 use App\Entity\Characters;
 use App\Entity\Movies;
+use App\Entity\MoviesCharacters;
 use Doctrine\ORM\EntityManagerInterface;
 
 
@@ -76,6 +77,23 @@ class StarWarsImportCommand extends Command
     
                 $insertedCharacterCount++;
             }
+
+            foreach ($character["films"] as $key => $characterFilm) {
+                $movieId = basename($characterFilm);
+
+                $movie =  $this->entityManager->getRepository(Movies::class)->find($movieId);
+
+                $moviesCharactersEntity = new MoviesCharacters();
+
+                $moviesCharactersEntity->setMovie($movie);
+                if ($existingCharacter) {
+                    $moviesCharactersEntity->setCharacter($existingCharacter);
+                } else {
+                    $moviesCharactersEntity->setCharacter($characterEntity);
+                }
+                $this->entityManager->persist($moviesCharactersEntity);
+            }
+
         }
 
         $this->entityManager->flush();

@@ -25,24 +25,24 @@ class MoviesCharacters
         return $this->id;
     }
 
-    public function getMovieId(): Movies
+    public function getMovie(): Movies
     {
         return $this->movie;
     }
 
-    public function setMovieId(Movies $movie): static
+    public function setMovie(Movies $movie): static
     {
         $this->movie = $movie;
 
         return $this;
     }
 
-    public function getCharacters(): Characters
+    public function getCharacter(): Characters
     {
         return $this->character;
     }
 
-    public function setCharacters(Characters $character): static
+    public function setCharacter(Characters $character): static
     {
         $this->character = $character;
 
