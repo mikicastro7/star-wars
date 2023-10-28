@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Edit Character</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.mass) }}
+    {{ form_row(form.height) }}
+    {{ form_row(form.gender) }}
+    
+    <div class="form-group">
+        <label for="character_picture">Character Picture</label>
+        {{ form_widget(form.picture) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+
+    {{ form_end(form) }}
+
+    <a href="{{ path('homepage') }}">Back to Characters</a>
+{% endblock %}
