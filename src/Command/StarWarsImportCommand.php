@@ -4,9 +4,7 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\HttpClient\HttpClient;
@@ -22,19 +20,19 @@ use Doctrine\ORM\EntityManagerInterface;
 )]
 class StarWarsImportCommand extends Command
 {
-    public function __construct(EntityManagerInterface $entityManager)
+     public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct();
         $this->entityManager = $entityManager;
-    }
+        }
 
     private $entityManager;
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+        protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
+            $io = new SymfonyStyle($input, $output);
 
-        $io->note("Requesting data to the API");
+           $io->note("Requesting data to the API");
 
         $httpClient = HttpClient::create();
         $movies = $httpClient->request('GET', 'https://swapi.dev/api/films')->toArray();
